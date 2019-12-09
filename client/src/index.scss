@@ -1,9 +1,162 @@
 @charset "utf-8";
 // Set your brand colors
-$purple: #7200ff;
+$purple: #8B4F8B;
+$darkpurple: #322F56;
+$base: #F9F9F9;
+$darkbase: #F1F3F4;
+$basepurple: rgb(240, 227, 240);
+
 // Update Bulma's global variables
 $primary: $purple;
+$info: $darkpurple;
 // Update some of Bulma's component variables
 $box-padding: 0.75rem;
+
 // Import all bulma component / element
 @import "../node_modules/bulma/bulma.sass";
+@import "./assets/fontawesome/scss/fontawesome.scss";
+@import "./assets/fontawesome/scss/solid.scss";
+
+// .app-nav {
+//     width: 100%;
+//     .app-nav-item{
+//         display: block;
+//         margin: 0 auto
+//     }
+// }
+
+body {
+    background-color: #8B4F8B;
+    font-family: 'Product Sans';
+}
+
+@media screen and (max-width: 800px){
+    .app-nav,
+    .app-hero,
+    .app-content{
+        width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 435px){
+    .app-title{
+        width: 0 !important;
+        visibility: hidden !important;
+    }
+    .app-title-sm{
+        width: 80px;
+        font-size: medium;
+        font-weight: 500; 
+        &:hover{
+            color: $purple !important;  
+        }
+        visibility: visible !important;
+        padding-top: 3px !important;
+    }
+}
+
+.app-nav-container-top {
+    width: 100%;
+    background-color:$purple;
+    // position: fixed;
+    // top: 0;
+    // left: 0;
+    transition: top 0.3s;
+}
+
+.app-nav-container-bottom {
+    width: 100%;
+    background-color:$purple;
+    position: fixed;
+    bottom: 0 ;
+    left: 0;
+}
+
+.app-container {
+    width: 100%;
+    background-color:$purple;
+}
+
+.app-nav {
+    width: 800px;
+    background: $base;
+    z-index: 100;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    // padding-bottom: 3px;
+}
+
+.app-hero{
+    width: 800px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.app-content {
+    width: 800px;
+    background: $basepurple;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding : 10px;
+}
+
+.app-nav-bottom-item {
+    display: inline-block;
+    width: 33.33%;
+    text-align: center;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    &:hover{
+        border-top: 2px solid $purple;
+        background-color: $darkbase;
+        color: $purple !important;
+    }
+}
+
+.app-nav-top-item-right {
+    width: 90px;
+    float: right;
+    padding-top: 6px;
+    &:hover{
+        color: $purple !important;
+    }
+}
+
+.app-title{
+    padding-left: 10px;
+    padding-top: 8px;
+    width: 200px;
+    font-size: x-large;
+    font-weight: 500;
+    float: left; 
+    &:hover{
+        color: $purple !important;  
+    }
+}
+
+.app-title-sm{
+    width: 0;
+    visibility: hidden;
+    float: left;
+}
+
+.app-logo img{
+    padding-left: 10px;
+    float: left;
+    height: 47px;
+    padding-top: 3px;
+}
+
+
+@font-face {
+  font-family: 'Product Sans';
+  font-style: normal;
+  src: url("./assets/font/Product\ Sans\ Regular.ttf") format("ttf");
+  }
+
+
+
+
