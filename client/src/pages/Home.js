@@ -4,36 +4,46 @@ import Card from '../components/Card';
 const data = [
     {
         row : 0,
-        col: [{	title: 'Desain Logo', 
+        col: [{	id: 0,
+                title: 'Desain Logo', 
                 price: 25,
                 discount: 0,
-                img: require('../assets/images/logo-1.png')
+                img: require('../assets/images/logo-1.png'),
+                paylater: true
                 },
-              {	title: 'Desain Spanduk/ Banner',
+              {	id: 1,
+                title: 'Desain Spanduk/ Banner',
                 price: 30,
                 discount: 0,
-                img: require('../assets/images/banner-1.png')
+                img: require('../assets/images/banner-1.png'),
+                paylater: true
             }]
     },
     {
         row : 1,
-        col: [{	title: 'Desain Email Marketing',
+        col: [{	id: 2,
+                title: 'Desain Email Marketing',
                 price: 50,
                 discount: 0,
-                img: require('../assets/images/email-1.png')
+                img: require('../assets/images/email-1.png'),
+                paylater: false
                 },
-              {	title: 'Website Company Profile',
+              {	id: 3,
+                title: 'Website Company Profile',
                 price: 200,
                 discount: 0,
-                img: require('../assets/images/company-1.png')
+                img: require('../assets/images/company-1.png'),
+                paylater: false
             }]
     },
     {
         row: 2,
-        col: [{	title: 'Toko Online Pribadi',
+        col: [{	id: 4,
+                title: 'Toko Online Pribadi',
                 price: 500,
                 discount: 0,
-                img: require('../assets/images/shop-1.png')
+                img: require('../assets/images/shop-1.png'),
+                paylater: false
             }]
     }
 ];

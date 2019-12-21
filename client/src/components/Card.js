@@ -1,19 +1,24 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+
 
 const Card = ({rowData}) => (
 	<div className = "row columns">
 		{
 			rowData.col.map((colData) => (
 				<div className = "column is-half">
-					<div className="card">
-						<div className="card-image">
+					<div className={"card tooltip"}>
+						{
+							colData.paylater ? <span class="tooltiptext">Bayar kalau udah jadi</span> : null
+						}
+						<Link to = {`/service/${colData.id}/${colData.title}`}  className="card-image">
 							<figure className="image is-2by1">
 							<img src={colData.img} alt="Placeholder image"/>
 							</figure>
-						</div>
+						</Link>
 						<div className="content">
-							<table>
-								<tr>
+							<table className = "service-detail">
+								<tr >
 									<td  className = "service-title">
 										<h5>
 										{

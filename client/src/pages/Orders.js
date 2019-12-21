@@ -1,11 +1,10 @@
 import React from 'react';
 
 const Orders = () => (
-    <div style={{position: 'relative'}}>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        <h1 style={{color: 'white'}}>
+    <div className="app-container">
+        <div className="app-content">
             Anda belum memiliki pesanan
-        </h1>
+        </div>
     </div>
 )
 

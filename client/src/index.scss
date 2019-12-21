@@ -15,8 +15,10 @@ $box-padding: 0.75rem;
 
 // Import all bulma component / element
 @import "../node_modules/bulma/bulma.sass";
-@import "./assets/fontawesome/scss/fontawesome.scss";
-@import "./assets/fontawesome/scss/solid.scss";
+@import "./assets/fontawesome/css/all.min.css";
+// @import "./assets/fontawesome/scss/fontawesome.scss";
+// @import "./assets/fontawesome/scss/solid.scss";
+// @import "./assets/fontawesome/scss/brands.scss";
 
 // .app-nav {
 //     width: 100%;
@@ -161,6 +163,18 @@ body {
     padding-top: 3px;
 }
 
+.app-mid{
+    text-align: center;
+    padding-top: 40px;
+}
+
+table.form-tab{
+    width: 100%;
+    td{
+        vertical-align: middle;
+        padding: 5px;
+    }
+}
 
 @font-face {
   font-family: 'Product Sans';
@@ -168,39 +182,58 @@ body {
   src: url("./assets/font/Product\ Sans\ Regular.ttf") format("ttf");
   }
 
-  .service-title{
-    vertical-align: middle !important;
-    //   display:in;
-    width: 55%;
-    h5{
-        // margin-top: 10px;
-        margin-bottom: 0px;
-    }
+  .service-detail{
+    background: white;
+    .service-title{
+        vertical-align: middle !important;
+        width: 55%;
+        h5{
+            margin-bottom: 0px;
+        }
+      }
+      .service-from{
+        width: 20%;
+        p{
+            text-align: right;
+        }
+      }
+      .service-price{
+        width: 25%;
+        background: $purple;
+        vertical-align: middle !important;
+        h4{
+            margin-bottom: 0px;
+            color: white;
+        }
+      }
   }
 
-  .service-from{
-    // display:inline;
-    width: 20%;
-    p{
-        text-align: right;
-    }
+ //tooltips
+ .tooltip {
+    position: relative;
   }
-
-  .service-price{
-    // display:inline;
-    width: 25%;
-    background: $purple;
-    vertical-align: middle !important;
-    h4{
-        // margin-top: 10px;
-        margin-bottom: 0px;
-        color: white;
-    }
-  }
-
   
-  //background animation
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 5px;
+    margin-left: 10px;
+    margin-top: 10px;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
 
+
+  //background animation
   @keyframes move_wave {
     0% {
         transform: translateX(0) translateZ(0) scaleY(1)

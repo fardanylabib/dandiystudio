@@ -5,6 +5,7 @@ import BottomNavigation from './components/BottomNavigation';
 import Home from './pages/Home';
 import Orders from './pages/Orders';
 import Profile from './pages/Profile';
+import ServiceItem from './pages/ServiceItem';
 import Background from './Background';
 import {
 	BrowserRouter as Router,
@@ -42,6 +43,8 @@ class App extends React.Component {
 						</Route>
 						<Route path='/profile'>
 							<Profile />
+						</Route>
+						<Route path = '/service/:id/:title' component={ServiceItem}>
 						</Route>
 					</Switch>
 					<BottomNavigation
