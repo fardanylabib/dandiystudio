@@ -37,6 +37,64 @@ exports.addUser = functions.https.onRequest((req, res) =>{
     });
 });
 
+exports.getService = functions.https.onRequest((req, res) =>{
+    return cors(req, res, () =>{
+        if(req.method !== 'GET') {
+            return res.status(401).json({
+              message: 'Request Not allowed'
+            });
+        }
+        const id = req.query.uid;
+
+        if(id){
+            return db.collection('services').doc(id).get()
+            .then((snapshot)=>{
+                
+                if(snapshot.empty){
+                    return res.status(401).json({
+                        message: 'Service with id: '+ id +' not found'
+                    });
+                }
+                
+                const serviceData = snapshot.data();
+                
+                return res.status(200).json({
+                    services: serviceData
+                });
+            })
+            .catch((err)=>{
+                return res.status(500).json({
+                    error: err.code,
+                    message: err.message
+                });
+            });
+        } else {
+            return db.collection('services').get()
+            .then((snapshot)=>{
+                let services = [];
+                if(snapshot.empty){
+                    return res.status(401).json({
+                        message: 'Users is empty'
+                    });
+                }
+                snapshot.forEach((item)=>{
+                    services.push(item.data());
+                })
+                return res.status(200).json({
+                    services: services
+                });
+            })
+            .catch((err)=>{
+                return res.status(500).json({
+                    error: err.code,
+                    message: err.message
+                });
+            });
+        }
+        
+    });
+});
+
 exports.getUser = functions.https.onRequest((req, res) =>{
     return cors(req, res, () =>{
         if(req.method !== 'GET') {

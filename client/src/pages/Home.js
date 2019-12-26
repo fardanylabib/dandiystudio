@@ -12,7 +12,7 @@ const data = [
                 paylater: true
                 },
               {	id: 1,
-                title: 'Desain Spanduk/ Banner',
+                title: 'Desain Brosur/ Banner',
                 price: 30,
                 discount: 0,
                 img: require('../assets/images/banner-1.png'),
@@ -48,7 +48,7 @@ const data = [
     }
 ];
 
-const Home = () => (
+const Home = ({setNavigation}) => (
     <div className="app-container">
         <div className="app-hero">
             <section className="hero is-info">
@@ -67,7 +67,7 @@ const Home = () => (
         <div className="app-content">
             {
                 data.map((item) =>(
-                    <Card key={item.row} rowData={item}/>
+                    <Card key={item.row} rowData={item} setNavigation={setNavigation}/>
                 ))
             }
         </div>

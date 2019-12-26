@@ -7,12 +7,17 @@ import Orders from './pages/Orders';
 import Profile from './pages/Profile';
 import ServiceItem from './pages/ServiceItem';
 import Background from './Background';
+import ScrollButton from './components/ScrollButton';
+import Authentication from './pages/Authentication';
+import { connect } from 'react-redux';
+
 import {
 	BrowserRouter as Router,
 	Switch,
 	Route
   } from "react-router-dom";
 import './App.css';
+
 
 class App extends React.Component {
 	constructor(props){
@@ -33,28 +38,40 @@ class App extends React.Component {
 			<Router>
 				<div>
 					<Background/>
-					<TopNavigation logo={logo}/>
-					<Switch>
-						<Route exact path='/'>
-							<Home />
-						</Route>
-						<Route path='/orders'>
-							<Orders />
-						</Route>
-						<Route path='/profile'>
-							<Profile />
-						</Route>
-						<Route path = '/service/:id/:title' component={ServiceItem}>
-						</Route>
-					</Switch>
-					<BottomNavigation
-						state={this.state.navState}
-						setNavigation={this.setNavigation}
-					/>
-				</div>	
+					{
+						this.props.isAuthenticating ? <Authentication/>:
+						<div>
+							<TopNavigation logo={logo}/>
+							<Switch>
+								<Route exact path='/'>
+									<Home setNavigation={this.setNavigation}/>
+								</Route>
+								<Route path='/orders'>
+									<Orders />
+								</Route>
+								<Route path='/profile'>
+									<Profile />
+								</Route>
+								<Route path = '/service/:id/:title' component={ServiceItem}>
+								</Route>
+							</Switch>
+							<BottomNavigation
+								state={this.state.navState}
+								setNavigation={this.setNavigation}
+							/>
+						</div>
+					}
+					<ScrollButton scrollStepInPx="50" delayInMs="16.66"/>	
+				</div>
 			</Router>	
 		);
 	}
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        isAuthenticating: state.isAuthenticating
+    }
+}
+
+export default connect(mapStateToProps)(App);

@@ -10,12 +10,15 @@ $basepurple: rgb(240, 227, 240);
 // Update Bulma's global variables
 $primary: $purple;
 $info: $darkpurple;
+$light:$basepurple;
 // Update some of Bulma's component variables
 $box-padding: 0.75rem;
-
+$divider-background-color: $purple;
+$divider-color: $purple;
 // Import all bulma component / element
 @import "../node_modules/bulma/bulma.sass";
 @import "./assets/fontawesome/css/all.min.css";
+@import '../node_modules/bulma-extensions/bulma-divider/dist/css/bulma-divider.sass';
 // @import "./assets/fontawesome/scss/fontawesome.scss";
 // @import "./assets/fontawesome/scss/solid.scss";
 // @import "./assets/fontawesome/scss/brands.scss";
@@ -39,6 +42,12 @@ body {
     .app-content{
         width: 100% !important;
     }
+    .app-content-padded{
+        padding-top: 0px !important;
+    }
+    .app-narrow{
+        width: 80% !important;
+    }
 }
 
 @media screen and (max-width: 435px){
@@ -58,6 +67,10 @@ body {
     }
 }
 
+.columns {
+    margin: 0 !important;
+}
+
 .app-nav-container-top {
     width: 100%;
     transition: top 0.3s;
@@ -74,7 +87,12 @@ body {
     width: 100%;
     position: relative;
     padding-bottom: 60px;
+    .app-content-padded{
+        padding-top: 40px;
+        // padding-bottom: 40px;
+    }
 }
+
 
 .app-nav {
     width: 800px;
@@ -100,9 +118,13 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    padding : 10px;
+    padding : 2.5%;
     z-index: 70;
+    .whiten{
+        background: white !important;
+    }
 }
+
 
 .app-nav-bottom-item {
     display: inline-block;
@@ -141,7 +163,7 @@ body {
 .app-title{
     padding-left: 10px;
     padding-top: 8px;
-    width: 200px;
+    width: 175px;
     font-size: x-large;
     font-weight: 500;
     float: left; 
@@ -165,7 +187,12 @@ body {
 
 .app-mid{
     text-align: center;
-    padding-top: 40px;
+    padding-top: 20px;
+}
+
+.app-narrow{
+    width:60%;
+    margin: auto;
 }
 
 table.form-tab{
@@ -173,8 +200,59 @@ table.form-tab{
     td{
         vertical-align: middle;
         padding: 5px;
+        
+    }
+    td:nth-child(1) {  
+        text-align: right;
     }
 }
+
+.app-paragraph{
+    text-align: justify;
+}
+
+button:focus {outline:0;}   
+
+.app-btn-img{
+    position:absolute;
+    left: 5px;
+    top: 3px;
+}
+
+.app-btn-txt{
+    margin-left: 30px;
+}
+
+.scroll {
+    opacity: 0.7;
+    background-color: $darkpurple;
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    bottom: 75px;
+    right: 10px;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    &:hover {
+        opacity: 1;
+    }
+}
+  
+  .arrow-up {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -9px;
+    margin-left: -5px;
+  }
+
+  //login
+  .app-social-sign{
+    margin-bottom: 10px;
+  }
+
 
 @font-face {
   font-family: 'Product Sans';
@@ -212,7 +290,28 @@ table.form-tab{
  .tooltip {
     position: relative;
   }
-  
+
+.divider{
+    // align-self: center !important;
+    display: flex;
+    justify-content: center;
+    color: $purple !important;
+    .div-line-h{          
+        // display: inline-block;
+        width:30%;
+        hr{
+            border-top: solid $purple 1px;
+            background-color: $basepurple;
+        }
+    }
+    .div-content{
+        padding-top: 10px;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+}
+
+
   .tooltip .tooltiptext {
     visibility: hidden;
     width: 120px;
