@@ -1,3 +1,4 @@
 node_modules/
 build/
 src/index.css
+src/firebase/FirebaseConfig.js
