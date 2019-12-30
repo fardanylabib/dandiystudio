@@ -8,3 +8,6 @@ export const SIGN_OUT = 'A02';
 export const REGISTER = 'A03';
 export const AUTHENTICATED = 'A04';
 
+export const SIGN_IN_WITH_GOOGLE = 'S01';
+export const SIGN_IN_WITH_FB = 'S02';
+

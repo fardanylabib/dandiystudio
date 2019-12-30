@@ -95,6 +95,33 @@ exports.getService = functions.https.onRequest((req, res) =>{
     });
 });
 
+//https://dandiystudio.firebaseapp.com/__/auth/handler
+exports.googleAuth = functions.https.onRequest((req,res) => {
+    return cors(req, res, () =>{
+        if(req.method !== 'POST') {
+            return res.status(401).json({
+              message: 'Request Not allowed'
+            });
+        }
+        return db.collection('users').add(req.body)
+        .then((docRef)=>{
+            return res.status(200).json({
+                message: 'Successfully adding user',
+                user: req.body,
+                ref: docRef
+            });
+        })
+        .catch((err)=>{
+            return res.status(500).json({
+                error: err.code,
+                message: err.message
+            });
+        });
+    });
+})
+
+
+
 exports.getUser = functions.https.onRequest((req, res) =>{
     return cors(req, res, () =>{
         if(req.method !== 'GET') {
@@ -152,6 +179,7 @@ exports.getUser = functions.https.onRequest((req, res) =>{
         
     });
 });
+
 
 
 

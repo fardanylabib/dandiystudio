@@ -30,9 +30,16 @@ class TopNavigation extends React.Component {
                         </a>
                     </div>
                     <div className="app-nav-top-item-right">
-                        <a className="button is-primary" onClick={() => this.props.authentication(true)}>
-                            <strong>Masuk</strong>
-                        </a>
+                        {
+                            this.props.user === null?
+                            <a className="button is-primary" onClick={() => this.props.authentication(true)}>
+                                <strong>Masuk</strong>
+                            </a>:
+                            <a className="button is-primary">
+                                <strong>Keluar</strong>
+                            </a>
+                        }
+                        
                     </div>
                 </nav>
             </div>

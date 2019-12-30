@@ -1,14 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {authentication} from '../redux/action';
+import {authentication, authenticated} from '../redux/action';
+import {socialSignIn} from '../firebase/Auth';
+import {Link} from 'react-router-dom';
+import * as Constants from '../Constants';
 
 const GoogleLogo = require('../assets/icons/google.svg');
 const FBLogo = require('../assets/icons/facebook.svg');
 
 class Authentication extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             needRegister: false
         }
@@ -18,6 +21,51 @@ class Authentication extends React.Component{
         this.setState({needRegister : isNeedRegister});
     }
 
+    handleSocialSign =  async (socialMedia) => {
+        const reduxState = this.props;
+        socialSignIn(socialMedia).then((userData) => {
+            console.log('user data adalah = ' +JSON.stringify(userData));
+            reduxState.authentication(false);
+            reduxState.authenticated(userData.token, userData.user);
+            console.log(JSON.stringify(reduxState.user));
+        }).catch((error)=>{
+
+            console.log(error.message);
+        });
+
+        // try{
+        //     const userData = await socialSignIn(socialMedia);
+        //     console.log(JSON.stringify(userData));
+        //     this.props.authenticated(userData.token, userData.user);
+        //     return true;
+        // }catch(error){
+        //     // Handle Errors here.
+        //     var errorCode = error.code;
+        //     var errorMessage = error.message;
+        //     // The email of the user's account used.
+        //     var email = error.email;
+        //     // The firebase.auth.AuthCredential type that was used.
+        //     var credential = error.credential;
+        //     console.log(`${errorCode} | ${errorMessage} | ${email} | ${credential}`);
+        // }
+
+        // socialSignIn(socialMedia).then(
+        //     (token, user) => this.props.authenticated(token, user)
+        // ).catch((error) => {
+        //         // Handle Errors here.
+        //         var errorCode = error.code;
+        //         var errorMessage = error.message;
+        //         // The email of the user's account used.
+        //         var email = error.email;
+        //         // The firebase.auth.AuthCredential type that was used.
+        //         var credential = error.credential;
+        //         console.log(`${errorCode} | ${errorMessage} | ${email} | ${credential}`);
+        //     }
+        // );
+    }
+
+
+
     render(){
         const {needRegister} = this.state;
         return(
@@ -25,12 +73,14 @@ class Authentication extends React.Component{
                 {
                     needRegister ?
                     <Register authSwitching = {this.authSwitching}/>:
-                    <Login authSwitching = {this.authSwitching}/>
+                    <Login authSwitching = {this.authSwitching} socialSign = {this.handleSocialSign}/>
                 }
                 <div className = 'app-mid'>
-                    <a className = 'button is-info' onClick={()=>this.props.authentication(false)} style={{textAlign:'right'}}>Ke halaman sebelumnya</a>
+                    <a className = 'button is-info' onClick={()=>this.props.authentication(false)} >Ke halaman sebelumnya</a>
                 </div>
             </div>
+
+            
         )
     }
 }
@@ -60,7 +110,7 @@ class Login extends React.Component{
                             <h2 className="subtitle">
                                 Masuk dengan sekali klik
                             </h2>
-                            <SocialSignIn sign={'Masuk'}/>
+                            <SocialSignIn sign={'Masuk'} by = {this.props.socialSign}/>
                             {/* <div className="is-divider" data-content="atau"></div> */}
                             <Divider content='atau'/>
                             <label>Masuk dengan email & password Anda</label>
@@ -107,7 +157,6 @@ class Register extends React.Component{
                     <div className='app-narrow'>
                         <div className='app-mid'>
                             <SocialSignIn sign={'Daftar'}/>
-                            {/* <div className="is-divider" data-content="atau"></div> */}
                             <Divider content='atau'/>
                             <label>Daftar dengan email & password</label>
                         </div>
@@ -143,16 +192,16 @@ const Divider = ({content}) => (
     </div>
 )
 
-const SocialSignIn = ({sign}) => (
+const SocialSignIn = ({sign,by}) => (
     <div>
-        <button className="button is-fullwidth is-primary is-outlined app-social-sign"> 
+        <button onClick={()=>by(Constants.SIGN_IN_WITH_GOOGLE)} className="button is-fullwidth is-primary is-outlined app-social-sign"> 
             <i className='app-btn-img'>
                 <img src={GoogleLogo} width='30px'/>
             </i>
             <p className='app-btn-txt'>{sign} dengan Google</p>
             
         </button>
-        <button className="button is-fullwidth is-primary is-outlined app-social-sign">
+        <button onClick={()=>by(Constants.SIGN_IN_WITH_FB)} className="button is-fullwidth is-primary is-outlined app-social-sign">
             <i className='app-btn-img'>
                 <img src={FBLogo} width='30px'/>
             </i>
@@ -161,8 +210,15 @@ const SocialSignIn = ({sign}) => (
     </div>
 )
 
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({authentication},dispatch);
+const mapStateToProps = (state) =>{
+    return{
+        user : state.user,
+        token : state.token
+    }
 }
 
-export default connect(null,mapDispatchToProps)(Authentication);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({authentication,authenticated},dispatch);
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Authentication);

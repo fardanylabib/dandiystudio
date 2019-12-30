@@ -15,8 +15,17 @@ export function handleSignOut(){
 }
 
 export function authentication(isAuthenticating){
+    console.log('authenticating')
     return{
         type: Constants.AUTHENTICATING,
         isAuthenticating
+    }
+}
+
+export function authenticated(token, user){  
+    console.log('authenticated')
+    return{
+        type: Constants.AUTHENTICATED,
+        token, user
     }
 }

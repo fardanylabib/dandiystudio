@@ -41,7 +41,7 @@ class App extends React.Component {
 					{
 						this.props.isAuthenticating ? <Authentication/>:
 						<div>
-							<TopNavigation logo={logo}/>
+							<TopNavigation logo={logo} user={this.props.user}/>
 							<Switch>
 								<Route exact path='/'>
 									<Home setNavigation={this.setNavigation}/>
@@ -70,7 +70,8 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        isAuthenticating: state.isAuthenticating
+		isAuthenticating: state.isAuthenticating,
+		user: state.user
     }
 }
 

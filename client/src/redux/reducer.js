@@ -3,6 +3,7 @@ import * as Actions from '../Constants';
 const initialState = {
     isAuthenticating:false,
     user: null,
+    token: null
 }
 
 function reducer(state = initialState , action){
@@ -15,7 +16,8 @@ function reducer(state = initialState , action){
         case Actions.AUTHENTICATED:
             return{
                 ...state,
-                user: action.user
+                user: action.user,
+                token: action.token
             }
         default:
             return state;
